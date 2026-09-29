@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Sherin James: how my SAP and business systems experience matches the ERP Specialist / Business Systems Analyst role in Dudley.">
+<title>The Dudley Match</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a warehouse match record. Label-style header with barcode, then requirement-to-evidence rows like a goods-receipt check. */
+:root {
+  --paper: #eef1f4;
+  --sheet: #ffffff;
+  --ink: #16212c;
+  --muted: #56636f;
+  --rule: #d3d9df;
+  --label: #f1b418;
+  --label-ink: #1b1403;
+  --ok: #1f7a4d;
+  --ok-bg: #e2f2e9;
+  --part: #8a5a00;
+  --part-bg: #fbefd2;
+  --display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", Roboto, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0e151c; --sheet: #151f29; --ink: #e5eaef; --muted: #9aa7b3; --rule: #2a3744;
+    --label: #f2b632; --label-ink: #1b1403; --ok: #6fd3a0; --ok-bg: #173327; --part: #f2c46a; --part-bg: #3a2c10;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0e151c; --sheet: #151f29; --ink: #e5eaef; --muted: #9aa7b3; --rule: #2a3744;
+  --label: #f2b632; --label-ink: #1b1403; --ok: #6fd3a0; --ok-bg: #173327; --part: #f2c46a; --part-bg: #3a2c10;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 960px; margin: 0 auto; padding-inline: 20px; padding-block: 32px 64px; display: grid; gap: 40px; }
+h1, h2 { font-family: var(--display); text-wrap: balance; margin: 0; }
+p { margin: 0; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--label); outline-offset: 2px; }
+
+/* Label header */
+.tag { background: var(--label); color: var(--label-ink); border-radius: 6px; padding: 22px 24px; display: grid; grid-template-columns: 1fr auto; gap: 16px 28px; align-items: end; }
+.tag-meta { font-family: var(--mono); font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; display: flex; flex-wrap: wrap; gap: 6px 18px; grid-column: 1 / -1; }
+.tag h1 { font-size: clamp(2.2rem, 6vw, 3.9rem); font-weight: 800; font-stretch: 78%; line-height: .98; letter-spacing: -.01em; }
+.tag .sub { font-size: 1.05rem; max-width: 52ch; margin-top: 10px; font-weight: 500; }
+.bc { display: grid; gap: 4px; justify-items: center; min-width: 0; }
+.bc svg { width: 190px; max-width: 100%; height: 70px; display: block; }
+.bc span { font-family: var(--mono); font-size: 12px; letter-spacing: .2em; }
+
+.who { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; justify-content: space-between; }
+.who h2 { font-size: 1.6rem; font-weight: 700; font-stretch: 90%; }
+.who p { color: var(--muted); }
+.score { font-family: var(--mono); font-size: 14px; display: flex; gap: 10px; align-items: center; }
+.score b { font-family: var(--display); font-size: 1.6rem; font-stretch: 80%; color: var(--ok); }
+
+/* Section heads */
+.sec { display: grid; gap: 14px; }
+.eyebrow { font-family: var(--mono); font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.sec > h2 { font-size: clamp(1.5rem, 3.4vw, 2rem); font-weight: 750; font-stretch: 85%; }
+
+/* Match rows */
+.sheet { background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) 104px; gap: 18px; padding: 18px 20px; border-top: 1px solid var(--rule); align-items: start; }
+.row:first-child { border-top: 0; }
+.row.head { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding-block: 12px; }
+.req { font-weight: 600; }
+.ev { color: var(--ink); }
+.ev small { display: block; color: var(--muted); font-size: 13.5px; margin-top: 4px; }
+.chip { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .04em; padding: 4px 8px; border-radius: 4px; justify-self: start; white-space: nowrap; }
+.chip.ok { color: var(--ok); background: var(--ok-bg); }
+.chip.part { color: var(--part); background: var(--part-bg); }
+
+/* Numbers */
+.nums { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+.num { background: var(--sheet); padding: 18px; display: grid; gap: 4px; }
+.num b { font-family: var(--display); font-size: 2.3rem; font-weight: 800; font-stretch: 75%; line-height: 1; font-variant-numeric: tabular-nums; }
+.num span { color: var(--muted); font-size: 14px; }
+
+/* SAP timeline */
+.line { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.stop { border-top: 3px solid var(--ink); padding-top: 12px; display: grid; gap: 4px; min-width: 0; }
+.stop.now { border-top-color: var(--label); }
+.stop .yr { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.stop h3 { font-family: var(--display); font-stretch: 88%; font-size: 1.2rem; margin: 0; }
+.stop p { font-size: 15px; color: var(--muted); }
+
+/* Practical */
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 32px; }
+.fact { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 12px; padding-block: 10px; border-bottom: 1px solid var(--rule); }
+.fact dt { font-family: var(--mono); font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+.fact dd { margin: 0; }
+
+/* Contact */
+.contact { background: var(--ink); color: var(--paper); border-radius: 6px; padding: 26px 24px; display: grid; gap: 14px; }
+.contact h2 { font-size: clamp(1.5rem, 3.4vw, 2rem); font-stretch: 85%; }
+.links { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+.links a, .links button { font-family: var(--mono); font-size: 14px; color: var(--paper); border: 1px solid color-mix(in srgb, var(--paper) 40%, transparent); background: transparent; border-radius: 4px; padding: 8px 12px; text-decoration: none; cursor: pointer; }
+.links a:hover, .links button:hover { background: color-mix(in srgb, var(--paper) 12%, transparent); }
+.mail { font-family: var(--mono); user-select: all; }
+.foot { color: var(--muted); font-size: 13px; }
+
+@media (max-width: 720px) {
+  .tag { grid-template-columns: 1fr; }
+  .bc { justify-items: start; }
+  .row { grid-template-columns: 1fr; gap: 8px; }
+  .row.head { display: none; }
+  .nums { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .line, .facts { grid-template-columns: 1fr; }
+  .fact { grid-template-columns: 110px minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .chip.ok { transition: transform .2s; }
+  .row:hover .chip { transform: translateX(3px); }
+}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <header class="tag">
+    <div class="tag-meta"><span>Match record</span><span>ERP Specialist / Business Systems Analyst</span><span>Dudley, West Midlands</span></div>
+    <div>
+      <h1>A match made on the factory floor</h1>
+      <p class="sub">Your client needs someone to own SAP and the systems around it in a manufacturer. That is the job I grew into at Taiko Foods.</p>
+    </div>
+    <div class="bc" aria-hidden="true"><svg id="barcode" viewBox="0 0 190 70" preserveAspectRatio="none"></svg><span>SAP-MFG-2026</span></div>
+  </header>
+
+  <section class="who">
+    <div>
+      <h2>Sherin James</h2>
+      <p>Business systems, SAP and data. Previously London, now Pune, ready to relocate.</p>
+    </div>
+    <div class="score"><b>4 / 4</b> core requirements matched</div>
+  </section>
+
+  <section class="sec">
+    <p class="eyebrow">What you will bring</p>
+    <h2>Every requirement, checked against real work</h2>
+    <div class="sheet">
+      <div class="row head"><span>Your brief</span><span>My evidence</span><span>Status</span></div>
+      <div class="row"><p class="req">Hands-on SAP experience in a manufacturing business</p><p class="ev">SAP at Taiko Foods for production orders, material and specification data, and reporting.<small>Plus daily SAP at UPS: orders, contracts, warehouse tracking, shipments.</small></p><span class="chip ok">Matched</span></div>
+      <div class="row"><p class="req">Experience of an ERP integrated with other business systems</p><p class="ev">Supported Point74 ERP alongside VQMS, TRACS and Element Suite, with SQL and Python pipelines linking them.<small>Led an ERP data migration of 700+ supplier and product records.</small></p><span class="chip ok">Matched</span></div>
+      <div class="row"><p class="req">Troubleshooting or improving ERP reports</p><p class="ev">Pulled and checked SAP reports, flagging and fixing data discrepancies.<small>Built 4 Power BI dashboards that cut audit preparation time by 40%.</small></p><span class="chip ok">Matched</span></div>
+      <div class="row"><p class="req">The drive to lead improvements</p><p class="ev">Led the factory's move to paperless with VQMS: requirements, testing, and training 50 staff.<small>Promoted twice in 13 months.</small></p><span class="chip ok">Matched</span></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <p class="eyebrow">What you will do</p>
+    <h2>The day job, and where I have done it</h2>
+    <div class="sheet">
+      <div class="row head"><span>The role</span><span>My experience</span><span>Status</span></div>
+      <div class="row"><p class="req">First point of contact and escalation for users</p><p class="ev">Go-to person for SAP and system issues at Taiko. Troubleshot directly, then escalated to IT, consultants and system vendors.</p><span class="chip ok">Done it</span></div>
+      <div class="row"><p class="req">Work with third-party consultants, IT and a wider group</p><p class="ev">Worked with external vendors for Point74, VQMS and TRACS.<small>Taiko is part of the Wonderfield Group, owned by Zensho Holdings, so I know how a site works inside a larger group.</small></p><span class="chip ok">Done it</span></div>
+      <div class="row"><p class="req">Stock take and barcode scanning projects</p><p class="ev">Barcode numbering and testing at Taiko, plus occasional stock takes.<small>Regular stock takes and barcode scanning at Marks &amp; Spencer.</small></p><span class="chip ok">Done it</span></div>
+      <div class="row"><p class="req">Oversee SAP integrations with warehouse, ecommerce, route planning and CRM</p><p class="ev">Warehouse tracking in SAP and Salesforce CRM, yes.<small>Ecommerce and route planning integrations would be new to me, and I learn systems fast.</small></p><span class="chip part">Partly</span></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <p class="eyebrow">Results at Taiko Foods</p>
+    <div class="nums">
+      <div class="num"><b>700+</b><span>ERP records validated in a data migration</span></div>
+      <div class="num"><b>90%</b><span>less paper after the VQMS rollout</span></div>
+      <div class="num"><b>40%</b><span>faster audit preparation with Power BI</span></div>
+      <div class="num"><b>50</b><span>staff trained on a new system</span></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <p class="eyebrow">SAP, over time</p>
+    <div class="line">
+      <div class="stop"><span class="yr">2022</span><h3>UPS, logistics</h3><p>Daily SAP for orders, contracts, warehouse tracking and shipments.</p></div>
+      <div class="stop"><span class="yr">2024 to 2025</span><h3>Taiko Foods, manufacturing</h3><p>SAP production and spec data, reports, user support, in a BRCGS food factory.</p></div>
+      <div class="stop now"><span class="yr">2026</span><h3>SAP S/4HANA training</h3><p>Currently studying S/4HANA to go deeper before day one.</p></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <p class="eyebrow">The practical bits</p>
+    <dl class="facts">
+      <div class="fact"><dt>Location</dt><dd>Pune, India. Lived and worked in London 2022 to 2025.</dd></div>
+      <div class="fact"><dt>Visa</dt><dd>Would need Skilled Worker sponsorship.</dd></div>
+      <div class="fact"><dt>On site</dt><dd>Happy to be full time in Dudley, hybrid after probation.</dd></div>
+      <div class="fact"><dt>Available</dt><dd>Immediately. Can interview during UK hours.</dd></div>
+    </dl>
+  </section>
+
+  <section class="contact">
+    <h2>Let's talk about the role</h2>
+    <p>Email <span class="mail">sherinalice28@gmail.com</span></p>
+    <div class="links">
+      <button type="button" id="copy">Copy email</button>
+      <a href="https://linkedin.com/in/jamessherin" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://sherinjames-sj.github.io/sherin-portfolio/" target="_blank" rel="noopener">Portfolio</a>
+    </div>
+  </section>
+  <p class="foot">Made by Sherin James for the ERP Specialist / Business Systems Analyst role, September 2026.</p>
+</main>
+
+<script>
+(function () {
+  var svg = document.getElementById('barcode');
+  var ns = 'http://www.w3.org/2000/svg';
+  var seed = 'SHERINJAMESSAP';
+  var x = 4, i = 0;
+  while (x < 186) {
+    var c = seed.charCodeAt(i % seed.length) + i;
+    var w = 1 + (c % 3);
+    var gap = 1 + ((c >> 2) % 3);
+    var r = document.createElementNS(ns, 'rect');
+    r.setAttribute('x', x); r.setAttribute('y', 0);
+    r.setAttribute('width', Math.min(w, 186 - x)); r.setAttribute('height', 70);
+    r.setAttribute('fill', 'currentColor');
+    svg.appendChild(r);
+    x += w + gap; i++;
+  }
+  var btn = document.getElementById('copy');
+  btn.addEventListener('click', function () {
+    var t = 'sherinalice28@gmail.com';
+    var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy email'; }, 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(t).then(done, function () { select(); });
+    } else { select(); }
+    function select() {
+      var el = document.querySelector('.mail');
+      var rg = document.createRange(); rg.selectNodeContents(el);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(rg);
+      btn.textContent = 'Press Ctrl+C';
+    }
+  });
+})();
+</script>
+</body>
+</html>
